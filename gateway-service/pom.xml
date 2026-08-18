@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.oneenterprise</groupId>
+    <artifactId>gateway-service</artifactId>
+    <version>0.1.0</version>
+    <name>gateway-service</name>
+    <description>Day 3 exercise: API Gateway - single client entry point that routes to User Service and Order Service</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <!-- Spring Cloud 2023.0.x is the release train aligned with Spring Boot 3.2.x.
+             If this exact patch version is unavailable in your environment's Maven
+             repository, bump to the latest 2023.0.x patch — the routing config
+             below does not depend on the patch version. -->
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+    </properties>
+
+    <dependencies>
+        <!-- Reactive gateway starter. NOTE: do not add spring-boot-starter-web
+             alongside this — Gateway runs on WebFlux/Netty, and mixing the
+             servlet (MVC) and reactive stacks in one app causes startup
+             failures. User Service and Order Service stay on plain
+             spring-boot-starter-web; only the gateway is reactive. -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      # Day 3 Challenge 1 — routes are defined here, not in Java code, so the
+      # routing table is understandable just by reading this file:
+      #   /api/users/**  -> User Service
+      #   /api/orders/** -> Order Service
+      routes:
+        - id: user-service
+          uri: ${user-service.base-url:http://localhost:8081}
+          predicates:
+            - Path=/api/users/**
+        - id: order-service
+          uri: ${order-service.base-url:http://localhost:8082}
+          predicates:
+            - Path=/api/orders/**
+
+# Same idea as Day 2's user-service.base-url in order-service: each backend's
+# location is externalized here rather than hard-coded into a route class.
+# Override at startup if a service moves, e.g.:
+#   --user-service.base-url=http://localhost:9091
+user-service:
+  base-url: http://localhost:8081
+order-service:
+  base-url: http://localhost:8082
