@@ -1,36 +1,4 @@
-# One Enterprise Platform — Day 1, 2 & 3 Exercises
 
-Started as two independent Spring Boot services demonstrating synchronous
-service-to-service REST communication (Day 1), refined into intentional,
-well-documented APIs with deliberate failure handling and externalized
-config (Day 2), and now fronted by an API Gateway so the client has one
-entry point instead of needing to know every backend address (Day 3).
-
-```
-one-enterprise-platform/
-├── API-CONTRACTS.md        → request/response contract for user & order services
-├── DATA-OWNERSHIP.md       → Day 3: who owns what data, and why
-├── CONFIGURATION-NOTES.md  → Day 3: config values + what breaks at 15-20 services
-├── ARCHITECTURE.md         → Day 3: mini enterprise design challenge (with Payment Service)
-├── gateway-service/         → single client entry point, routes to the two backends, port 8080
-├── user-service/             → owns user data, port 8081
-└── order-service/             → owns order data, calls user-service, port 8082
-```
-
-No database, no Docker, no service discovery platform — this project
-deliberately stays as small as each handbook allows, adding only what
-that day's exercises require.
-
-## Prerequisites
-
-- Java 17+
-- Maven 3.8+ (or use each project's own `mvnw` if you add one)
-
-## Running the services
-
-**Days 1–2**, two terminals is enough. **Day 3 onward**, start all three —
-User Service and Order Service are unchanged from Day 2; Gateway Service
-is new.
 
 **Terminal 1 — User Service (port 8081)**
 ```bash
