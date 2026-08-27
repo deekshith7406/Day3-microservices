@@ -1,15 +1,5 @@
 package com.oneenterprise.userservice.model;
 
-/**
- * Internal representation of a user — this is the persistence/domain shape,
- * not the API contract. It is deliberately NOT returned directly from the
- * controller. See {@link com.oneenterprise.userservice.dto.UserResponse}
- * for the object that actually crosses the network boundary.
- *
- * Day 2 note: keeping this separation means fields can be added here
- * (e.g. "status", audit timestamps, an internal risk score) without ever
- * silently changing what Order Service — or any other consumer — receives.
- */
 public class User {
 
     private final Long id;
